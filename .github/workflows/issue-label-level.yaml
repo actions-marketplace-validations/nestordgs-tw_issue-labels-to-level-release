@@ -13,7 +13,7 @@ jobs:
     name: Return Level release
     steps:
       - name: Level lelease
-        id: level-release
+        id: level_release
         uses: nestordgs-tw/issue-labels-to-level-release@main
         with:
           owner: ${{ github.repository_owner }}
@@ -23,6 +23,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Get Level
         run: |
-          LEVEL=${{ steps.level-release.level }}
+          LEVEL=${{ steps.level_release.outputs.level }}
           echo LEVEL: $LEVEL
 
