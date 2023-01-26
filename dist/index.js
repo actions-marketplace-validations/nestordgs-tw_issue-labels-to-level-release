@@ -9814,22 +9814,25 @@ var __webpack_exports__ = {};
 (() => {
 "use strict";
 __nccwpck_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2186);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(5438);
-/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(7147);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2186);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(5438);
+/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
 const main = async () => {
     try {
-        const repo = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('repo', { required: true });
-        const token = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('token', { required: true });
-        const owner = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('owner', { required: true });
-        const issue_number = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('issue_number', { required: true });
-        const labels_to_validate = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('labels_to_validate', { required: true });
+        const repo = _actions_core__WEBPACK_IMPORTED_MODULE_1__.getInput('repo', { required: true });
+        const token = _actions_core__WEBPACK_IMPORTED_MODULE_1__.getInput('token', { required: true });
+        const owner = _actions_core__WEBPACK_IMPORTED_MODULE_1__.getInput('owner', { required: true });
+        const issue_number = _actions_core__WEBPACK_IMPORTED_MODULE_1__.getInput('issue_number', { required: true });
+        const labels_to_validate = _actions_core__WEBPACK_IMPORTED_MODULE_1__.getInput('labels_to_validate', { required: true });
         
-        const octokit = new _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(token);
+        const octokit = new _actions_github__WEBPACK_IMPORTED_MODULE_2__.getOctokit(token);
         
         const labelsToValidate = JSON.parse(labels_to_validate);
 
@@ -9840,27 +9843,27 @@ const main = async () => {
         });
         
         if (!data.length) {
-            _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed('Issue without labels');
+            _actions_core__WEBPACK_IMPORTED_MODULE_1__.setFailed('Issue without labels');
         }
         
         if (!labelsToValidate.length) {
-            _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed('No labels to validate');
+            _actions_core__WEBPACK_IMPORTED_MODULE_1__.setFailed('No labels to validate');
         }
 
         let level = 'default'
 
         data.forEach((issueLabel, index) => {
             const levelRelease = labelsToValidate.filter(item => item.label == issueLabel.name);
-            _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`levelRelease: `);
-            _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(levelRelease.length);
+            _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(`levelRelease: `);
+            _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(levelRelease.length);
             if (levelRelease.length) {
                 level = levelRelease[0].value
             }
         });
 
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.exportVariable('level', level);
+        fs__WEBPACK_IMPORTED_MODULE_0__.appendFileSync(process.env.GITHUB_OUTPUT, `level=${level}\n`);
     } catch (error) {
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);
+        _actions_core__WEBPACK_IMPORTED_MODULE_1__.setFailed(error.message);
     }
 }
 
