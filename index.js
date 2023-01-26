@@ -27,7 +27,7 @@ const main = async () => {
             core.setFailed('No labels to validate');
         }
 
-        const level = 'default'
+        let level = 'default'
 
         data.forEach((issueLabel, index) => {
             const levelRelease = labelsToValidate.filter(item => item.label == issueLabel.name);

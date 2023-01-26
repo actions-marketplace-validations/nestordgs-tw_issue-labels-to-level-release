@@ -9847,7 +9847,7 @@ const main = async () => {
             _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed('No labels to validate');
         }
 
-        const level = 'default'
+        let level = 'default'
 
         data.forEach((issueLabel, index) => {
             const levelRelease = labelsToValidate.filter(item => item.label == issueLabel.name);
