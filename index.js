@@ -19,10 +19,12 @@ const main = async () => {
 
         const level = 'default'
 
-        octokit.log.info('issue_number', issue_number);
-        octokit.log.info('labels_to_validate', labels_to_validate);
-        octokit.log.info('issue', issue);
-
+        core.info(`labels_to_validate: `);
+        core.info(labels_to_validate);
+        core.info(typeof labels_to_validate);
+        core.info(`issue: `);
+        core.info(issue);
+        core.info(typeof issue);
         core.exportVariable('level', level);
     } catch (error) {
         core.setFailed(error.message);
