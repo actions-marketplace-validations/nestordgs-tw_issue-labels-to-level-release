@@ -1,0 +1,23 @@
+{
+  "name": "issue-labels-to-level-release",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nestordgs-tw/issue-labels-to-level-release.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nestordgs-tw/issue-labels-to-level-release/issues"
+  },
+  "homepage": "https://github.com/nestordgs-tw/issue-labels-to-level-release#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1"
+  }
+}

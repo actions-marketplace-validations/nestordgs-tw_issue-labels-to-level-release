@@ -1,0 +1,21 @@
+name: 'Issue labels return level of release'
+description: 'return level of release according to labels in issue labels'
+inputs:
+  owner:
+    description: 'The owner of the repository'
+    required: true
+  repo:
+    description: 'The name of the repository'
+    required: true
+  labels_to_validate:
+    description: 'list of array'
+    required: true
+  issue_number:
+    description: 'The number of the pull request'
+    required: true
+  token:
+    description: 'The token to use to access the GitHub API'
+    required: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
