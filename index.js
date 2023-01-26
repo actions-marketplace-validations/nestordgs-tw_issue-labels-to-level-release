@@ -20,10 +20,10 @@ const main = async () => {
         const level = 'default'
 
         core.info(`labels_to_validate: `);
-        core.info(labels_to_validate);
+        core.info(JSON.parse(labels_to_validate));
         core.info(typeof labels_to_validate);
         core.info(`issue: `);
-        core.info(issue);
+        core.info(JSON.stringify(issue));
         core.info(typeof issue);
         core.exportVariable('level', level);
     } catch (error) {

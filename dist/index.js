@@ -9840,10 +9840,10 @@ const main = async () => {
         const level = 'default'
 
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`labels_to_validate: `);
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(labels_to_validate);
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(JSON.parse(labels_to_validate));
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(typeof labels_to_validate);
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`issue: `);
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(issue);
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(JSON.stringify(issue));
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(typeof issue);
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.exportVariable('level', level);
     } catch (error) {
