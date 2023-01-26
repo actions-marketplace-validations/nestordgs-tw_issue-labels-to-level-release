@@ -23,6 +23,7 @@ const main = async () => {
         octokit.log.info('labels_to_validate', labels_to_validate);
 
         core.info(`level: ${labels_to_validate}`)
+        core.info(`issue: ${issue}`)
         core.exportVariable('level', level);
     } catch (error) {
         core.setFailed(error.message);

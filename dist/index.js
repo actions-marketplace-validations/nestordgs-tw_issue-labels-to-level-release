@@ -9843,6 +9843,7 @@ const main = async () => {
         octokit.log.info('labels_to_validate', labels_to_validate);
 
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`level: ${labels_to_validate}`)
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`issue: ${issue}`)
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.exportVariable('level', level);
     } catch (error) {
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);
