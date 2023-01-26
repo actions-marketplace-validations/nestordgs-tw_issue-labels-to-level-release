@@ -1,0 +1,22 @@
+name: Issue label to level release
+
+on:
+  issue_comment:
+    types:
+      - created
+
+
+jobs:
+  issue-label:
+    if: ${{ !github.event.issue.pull_request && github.event.comment.body == '/Approved' }}
+    runs-on: ubuntu-latest
+    name: Return Level release
+    steps:
+      - name: Level lelease
+        uses: nestordgs-tw/issue-labels-to-level-release@main
+        with:
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          issue_number: ${{ github.event.number }}
+          labels_to_validate: '[{ "value": "patch", "label": "bug" },{ "value": "minor", "label": "enhancement" },{ "value": "major", "label": "major" }]'
+          token: ${{ secrets.GITHUB_TOKEN }}
