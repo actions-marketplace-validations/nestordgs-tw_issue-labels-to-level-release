@@ -23,7 +23,7 @@ const main = async () => {
             core.setFailed('Issue without labels');
         }
         
-        if (!labels_to_validate.length) {
+        if (!labelsToValidate.length) {
             core.setFailed('No labels to validate');
         }
 
@@ -31,6 +31,9 @@ const main = async () => {
 
         data.forEach((issueLabel, index) => {
             const levelRelease = labelsToValidate.filter(item => item.label == issueLabel.name);
+            core.info(`levelRelease: `);
+            core.info(JSON.stringify(labelsToValidate));
+            core.info(JSON.stringify(levelRelease));
             if (levelRelease.length) {
                 level = levelRelease.value
             }

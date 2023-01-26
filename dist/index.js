@@ -9843,7 +9843,7 @@ const main = async () => {
             _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed('Issue without labels');
         }
         
-        if (!labels_to_validate.length) {
+        if (!labelsToValidate.length) {
             _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed('No labels to validate');
         }
 
@@ -9851,6 +9851,9 @@ const main = async () => {
 
         data.forEach((issueLabel, index) => {
             const levelRelease = labelsToValidate.filter(item => item.label == issueLabel.name);
+            _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`levelRelease: `);
+            _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(JSON.stringify(labelsToValidate));
+            _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(JSON.stringify(levelRelease));
             if (levelRelease.length) {
                 level = levelRelease.value
             }
