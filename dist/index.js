@@ -9831,7 +9831,7 @@ const main = async () => {
 
         const octokit = new _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(token);
 
-        const issue = octokit.rest.issues.listLabelsOnIssue({
+        const issue = await octokit.rest.issues.listLabelsOnIssue({
             owner,
             repo,
             issue_number

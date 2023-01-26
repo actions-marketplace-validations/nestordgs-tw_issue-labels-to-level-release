@@ -11,7 +11,7 @@ const main = async () => {
 
         const octokit = new github.getOctokit(token);
 
-        const issue = octokit.rest.issues.listLabelsOnIssue({
+        const issue = await octokit.rest.issues.listLabelsOnIssue({
             owner,
             repo,
             issue_number
