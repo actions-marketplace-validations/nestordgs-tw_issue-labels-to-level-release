@@ -32,10 +32,9 @@ const main = async () => {
         data.forEach((issueLabel, index) => {
             const levelRelease = labelsToValidate.filter(item => item.label == issueLabel.name);
             core.info(`levelRelease: `);
-            core.info(JSON.stringify(labelsToValidate));
-            core.info(JSON.stringify(levelRelease));
+            core.info(levelRelease.length);
             if (levelRelease.length) {
-                level = levelRelease.value
+                level = levelRelease[0].value
             }
         });
 

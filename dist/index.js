@@ -9852,10 +9852,9 @@ const main = async () => {
         data.forEach((issueLabel, index) => {
             const levelRelease = labelsToValidate.filter(item => item.label == issueLabel.name);
             _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`levelRelease: `);
-            _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(JSON.stringify(labelsToValidate));
-            _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(JSON.stringify(levelRelease));
+            _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(levelRelease.length);
             if (levelRelease.length) {
-                level = levelRelease.value
+                level = levelRelease[0].value
             }
         });
 
