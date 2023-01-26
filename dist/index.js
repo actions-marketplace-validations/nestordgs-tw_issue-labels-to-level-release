@@ -9828,23 +9828,34 @@ const main = async () => {
         const owner = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('owner', { required: true });
         const issue_number = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('issue_number', { required: true });
         const labels_to_validate = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('labels_to_validate', { required: true });
-
+        
         const octokit = new _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(token);
+        
+        const labelsToValidate = JSON.parse(labels_to_validate);
 
-        const issue = await octokit.rest.issues.listLabelsOnIssue({
+        const { data } = await octokit.rest.issues.listLabelsOnIssue({
             owner,
             repo,
             issue_number
-        })
+        });
+        
+        if (!data.length) {
+            _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed('Issue without labels');
+        }
+        
+        if (!labels_to_validate.length) {
+            _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed('No labels to validate');
+        }
 
         const level = 'default'
 
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`labels_to_validate: `);
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(JSON.parse(labels_to_validate));
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(typeof labels_to_validate);
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`issue: `);
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(JSON.stringify(issue));
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(typeof issue);
+        data.forEach((issueLabel, index) => {
+            const levelRelease = labelsToValidate.filter(item => item.label == issueLabel.name);
+            if (levelRelease.length) {
+                level = levelRelease.value
+            }
+        });
+
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.exportVariable('level', level);
     } catch (error) {
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);

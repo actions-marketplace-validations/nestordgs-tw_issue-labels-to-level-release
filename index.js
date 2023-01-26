@@ -8,23 +8,34 @@ const main = async () => {
         const owner = core.getInput('owner', { required: true });
         const issue_number = core.getInput('issue_number', { required: true });
         const labels_to_validate = core.getInput('labels_to_validate', { required: true });
-
+        
         const octokit = new github.getOctokit(token);
+        
+        const labelsToValidate = JSON.parse(labels_to_validate);
 
-        const issue = await octokit.rest.issues.listLabelsOnIssue({
+        const { data } = await octokit.rest.issues.listLabelsOnIssue({
             owner,
             repo,
             issue_number
-        })
+        });
+        
+        if (!data.length) {
+            core.setFailed('Issue without labels');
+        }
+        
+        if (!labels_to_validate.length) {
+            core.setFailed('No labels to validate');
+        }
 
         const level = 'default'
 
-        core.info(`labels_to_validate: `);
-        core.info(JSON.parse(labels_to_validate));
-        core.info(typeof labels_to_validate);
-        core.info(`issue: `);
-        core.info(JSON.stringify(issue));
-        core.info(typeof issue);
+        data.forEach((issueLabel, index) => {
+            const levelRelease = labelsToValidate.filter(item => item.label == issueLabel.name);
+            if (levelRelease.length) {
+                level = levelRelease.value
+            }
+        });
+
         core.exportVariable('level', level);
     } catch (error) {
         core.setFailed(error.message);
