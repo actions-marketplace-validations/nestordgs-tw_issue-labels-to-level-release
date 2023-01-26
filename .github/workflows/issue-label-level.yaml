@@ -17,6 +17,6 @@ jobs:
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
-          issue_number: ${{ github.event.number }}
+          issue_number: ${{ github.event.issue.number }}
           labels_to_validate: '[{ "value": "patch", "label": "bug" },{ "value": "minor", "label": "enhancement" },{ "value": "major", "label": "major" }]'
           token: ${{ secrets.GITHUB_TOKEN }}
